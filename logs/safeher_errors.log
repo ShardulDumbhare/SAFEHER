@@ -1,0 +1,60 @@
+2026-01-17 23:22:49 - SAFEHER - ERROR - [logger.py:56] - Connection pool error: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-17 23:22:53 - SAFEHER - ERROR - [logger.py:56] - MySQL connection warning: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-17 23:22:53 - SAFEHER - ERROR - [logger.py:56] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-17 23:22:58 - SAFEHER - ERROR - [logger.py:56] - Connection pool error: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-17 23:23:02 - SAFEHER - ERROR - [logger.py:56] - MySQL connection warning: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-17 23:23:02 - SAFEHER - ERROR - [logger.py:56] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-17 23:29:13 - SAFEHER - ERROR - [logger.py:56] - Connection pool error: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-17 23:29:17 - SAFEHER - ERROR - [logger.py:56] - MySQL connection warning: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-17 23:29:17 - SAFEHER - ERROR - [logger.py:56] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-17 23:29:22 - SAFEHER - ERROR - [logger.py:56] - Connection pool error: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-17 23:33:09 - SAFEHER - ERROR - [logger.py:56] - Connection pool error: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-17 23:33:13 - SAFEHER - ERROR - [logger.py:56] - MySQL connection warning: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-17 23:33:13 - SAFEHER - ERROR - [logger.py:56] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-17 23:33:18 - SAFEHER - ERROR - [logger.py:56] - Connection pool error: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-17 23:33:22 - SAFEHER - ERROR - [logger.py:56] - MySQL connection warning: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-17 23:33:22 - SAFEHER - ERROR - [logger.py:56] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 02:03:30 - SAFEHER - ERROR - [logger.py:56] - Connection pool error: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-18 02:03:34 - SAFEHER - ERROR - [logger.py:56] - MySQL connection warning: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-18 02:03:34 - SAFEHER - ERROR - [logger.py:56] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 02:03:38 - SAFEHER - ERROR - [logger.py:56] - Connection pool error: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-18 02:03:43 - SAFEHER - ERROR - [logger.py:56] - MySQL connection warning: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-18 02:03:43 - SAFEHER - ERROR - [logger.py:56] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 02:08:20 - SAFEHER - ERROR - [logger.py:56] - Connection pool error: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-18 02:08:24 - SAFEHER - ERROR - [logger.py:56] - MySQL connection warning: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-18 02:08:24 - SAFEHER - ERROR - [logger.py:56] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 02:08:29 - SAFEHER - ERROR - [logger.py:56] - Connection pool error: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-18 02:08:33 - SAFEHER - ERROR - [logger.py:56] - MySQL connection warning: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-18 02:08:33 - SAFEHER - ERROR - [logger.py:56] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 02:13:46 - SAFEHER - ERROR - [logger.py:56] - Error fetching user testuser: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-18 02:15:14 - SAFEHER - ERROR - [logger.py:56] - Error fetching user testuser: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2026-01-18 03:10:43 - SAFEHER - ERROR - [logger.py:56] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 03:10:43 - SAFEHER - ERROR - [logger.py:56] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 03:11:04 - SAFEHER - ERROR - [logger.py:56] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 03:11:04 - SAFEHER - ERROR - [logger.py:56] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 03:11:04 - SAFEHER - ERROR - [logger.py:56] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 03:11:04 - SAFEHER - ERROR - [logger.py:56] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 03:11:37 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 03:11:37 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 03:11:42 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 03:11:42 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 03:11:53 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 03:11:53 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 03:11:54 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 03:11:54 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 03:14:24 - SAFEHER - ERROR - [logger.py:65] - Error fetching contacts for testuser: 1054 (42S22): Unknown column 'username' in 'where clause'
+2026-01-18 03:14:29 - SAFEHER - ERROR - [logger.py:65] - Error fetching locations for testuser: 1054 (42S22): Unknown column 'timestamp' in 'field list'
+2026-01-18 03:14:32 - SAFEHER - ERROR - [logger.py:65] - Error fetching contacts for testuser: 1054 (42S22): Unknown column 'username' in 'where clause'
+2026-01-18 03:14:35 - SAFEHER - ERROR - [logger.py:65] - Error fetching locations for testuser: 1054 (42S22): Unknown column 'timestamp' in 'field list'
+2026-01-18 03:14:36 - SAFEHER - ERROR - [logger.py:65] - Error fetching contacts for testuser: Failed getting connection; pool exhausted
+2026-01-18 03:14:41 - SAFEHER - ERROR - [logger.py:65] - Error fetching contacts for testuser: Failed getting connection; pool exhausted
+2026-01-18 03:15:03 - SAFEHER - ERROR - [logger.py:65] - Error fetching user testuser: Failed getting connection; pool exhausted
+2026-01-18 03:15:14 - SAFEHER - ERROR - [logger.py:65] - Error fetching user testuser: Failed getting connection; pool exhausted
+2026-01-18 03:15:25 - SAFEHER - ERROR - [logger.py:65] - Error fetching user testuser: Failed getting connection; pool exhausted
+2026-01-18 03:15:37 - SAFEHER - ERROR - [logger.py:65] - Error fetching user testuser: Failed getting connection; pool exhausted
+2026-01-18 03:25:11 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 03:25:11 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 03:25:11 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 03:25:12 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 03:25:12 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 03:25:12 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables

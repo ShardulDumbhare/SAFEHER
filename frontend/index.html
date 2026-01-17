@@ -1,0 +1,974 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafeHer - Women Safety App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 0 30px rgba(220, 38, 38, 0.4), 0 0 60px rgba(220, 38, 38, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 50px rgba(220, 38, 38, 0.6), 0 0 80px rgba(220, 38, 38, 0.3);
+      }
+    }
+    
+    .sos-button {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    
+    .sos-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 60px rgba(220, 38, 38, 0.7), 0 0 100px rgba(220, 38, 38, 0.4);
+    }
+    
+    .sos-button:active {
+      transform: scale(0.95);
+    }
+    
+    .menu-button {
+      transition: all 0.3s ease;
+    }
+    
+    .menu-button:hover {
+      transform: translateX(-4px);
+      box-shadow: 0 8px 25px rgba(244, 114, 182, 0.3);
+    }
+    
+    .vertical-text {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+    }
+    
+    .phone-shadow {
+      box-shadow: 
+        0 50px 100px -20px rgba(0, 0, 0, 0.15),
+        0 30px 60px -30px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+    
+    .map-card {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      transition: all 0.3s ease;
+    }
+    
+    .map-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(220, 38, 38, 0.2);
+    }
+    
+    .map-card:active {
+      transform: scale(0.98);
+    }
+    
+    @keyframes pin-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    
+    .map-pin {
+      animation: pin-bounce 1.5s ease-in-out infinite;
+    }
+    
+    .map-pin:nth-child(2) { animation-delay: 0.3s; }
+    .map-pin:nth-child(3) { animation-delay: 0.6s; }
+    
+    /* Fullscreen Map Modal */
+    .map-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    
+    .map-modal.active {
+      display: flex;
+    }
+    
+    .map-modal-content {
+      width: 90%;
+      height: 90%;
+      max-width: 1200px;
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    
+    .map-modal-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1001;
+      border-bottom: 1px solid rgba(220, 38, 38, 0.1);
+    }
+    
+    .close-map-btn {
+      background: linear-gradient(145deg, #ef4444, #dc2626);
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+    
+    .close-map-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+    }
+    
+    #live-map {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .routine-item, .emergency-item, .alert-item {
+      background: linear-gradient(135deg, #fff1f2 0%, #fce7f3 100%);
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border: 1px solid #fbcfe8;
+    }
+    
+    .delete-btn {
+      background: #fee2e2;
+      color: #dc2626;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .delete-btn:hover {
+      background: #fecaca;
+      transform: scale(1.05);
+    }
+  </style>
+ </head>
+ <body class="h-full w-full m-0 p-0 overflow-auto" id="app-body">
+  <div class="min-h-full w-full flex items-center justify-center p-8" id="main-container">
+   <div class="relative flex items-center gap-6">
+    <div class="vertical-text h-96 flex items-center"><span id="brand-text" class="text-4xl font-extrabold tracking-widest" style="color: #dc2626; letter-spacing: 0.3em;">SAFEHER</span></div>
+    <div class="relative">
+     <div class="w-72 h-[580px] bg-white rounded-[3rem] phone-shadow relative overflow-hidden border-8 border-gray-100">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-gray-900 rounded-b-2xl z-10"></div>
+      <div class="h-full w-full pt-10 pb-6 px-4 flex flex-col" id="phone-screen" style="background: linear-gradient(180deg, #fff5f5 0%, #ffffff 50%, #fdf2f8 100%);">
+       <div class="flex-1 flex flex-col items-center justify-start pt-8">
+        <div class="relative"><button onclick="startSOSAlert()" class="sos-button w-32 h-32 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300" style="background: linear-gradient(145deg, #ef4444, #dc2626);"> <span id="sos-text" class="text-white text-3xl font-bold tracking-wider">SOS</span> </button> <button onclick="openPinSettingsModal()" class="absolute -bottom-2 -right-2 w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center cursor-pointer border-2 border-white shadow-lg hover:scale-110 transition-all" style="font-size: 16px;">⚙️</button>
+        </div>
+        <p class="text-xs text-gray-400 mt-3 font-medium">Press for emergency alert</p>
+        <div id="sos-timer" style="display: none; margin-top: 16px; text-align: center;">
+         <div style="width: 80px; height: 80px; margin: 0 auto; position: relative;">
+          <svg style="transform: rotate(-90deg);" width="80" height="80"><circle cx="40" cy="40" r="35" stroke="#fee2e2" stroke-width="6" fill="none" /> <circle id="timer-circle" cx="40" cy="40" r="35" stroke="#dc2626" stroke-width="6" fill="none" stroke-dasharray="220" stroke-dashoffset="0" style="transition: stroke-dashoffset 1s linear;" />
+          </svg>
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #dc2626; font-size: 24px; font-weight: 800;"><span id="timer-seconds">30</span>
+          </div>
+         </div>
+         <p style="color: #dc2626; font-weight: 700; margin-top: 8px; font-size: 14px;">Emergency Alert Active!</p><button onclick="openPinVerificationModal()" style="margin-top: 12px; background: #fef2f2; color: #dc2626; border: 2px solid #dc2626; padding: 8px 20px; border-radius: 12px; font-weight: 700; font-size: 12px; cursor: pointer;">Cancel with PIN</button>
+        </div>
+       </div>
+       <div class="flex gap-3 mt-auto">
+        <button onclick="openMapModal()" class="map-card flex-1 rounded-2xl p-3 border border-pink-100 relative overflow-hidden cursor-pointer" style="height: 180px;"> <span class="absolute top-2 left-3 text-xs font-semibold text-gray-600 z-10">MAP</span>
+         <svg class="w-full h-full" viewbox="0 0 120 140" fill="none"><path d="M0 70 L120 70" stroke="#e2e8f0" stroke-width="8" /> <path d="M60 0 L60 140" stroke="#e2e8f0" stroke-width="8" /> <path d="M20 30 L100 110" stroke="#f1f5f9" stroke-width="4" /> <path d="M100 30 L20 110" stroke="#f1f5f9" stroke-width="4" /> <g class="map-pin">
+           <circle cx="60" cy="65" r="8" fill="#dc2626" />
+           <circle cx="60" cy="65" r="4" fill="white" />
+          </g> <g class="map-pin">
+           <circle cx="35" cy="45" r="5" fill="#f87171" />
+           <circle cx="35" cy="45" r="2" fill="white" />
+          </g> <g class="map-pin">
+           <circle cx="90" cy="95" r="5" fill="#f87171" />
+           <circle cx="90" cy="95" r="2" fill="white" />
+          </g>
+         </svg></button>
+        <div class="flex flex-col gap-2"><button onclick="openRoutineModal()" id="btn-routine" class="menu-button px-4 py-2.5 rounded-xl text-xs font-semibold text-pink-700 border border-pink-200 cursor-pointer" style="background: linear-gradient(135deg, #fff1f2 0%, #fce7f3 100%); min-width: 90px;"> ROUTINE </button> <button onclick="openEmergencyModal()" id="btn-emergency" class="menu-button px-4 py-2.5 rounded-xl text-xs font-semibold text-pink-700 border border-pink-200 cursor-pointer" style="background: linear-gradient(135deg, #fff1f2 0%, #fce7f3 100%); min-width: 90px;"> EMERGENCY </button> <button onclick="openAlertModal()" id="btn-alert" class="menu-button px-4 py-2.5 rounded-xl text-xs font-semibold text-pink-700 border border-pink-200 cursor-pointer" style="background: linear-gradient(135deg, #fff1f2 0%, #fce7f3 100%); min-width: 90px;"> ALERT </button> <button onclick="openFakeCallModal()" id="btn-fakecall" class="menu-button px-4 py-2.5 rounded-xl text-xs font-semibold text-pink-700 border border-pink-200 cursor-pointer" style="background: linear-gradient(135deg, #fff1f2 0%, #fce7f3 100%); min-width: 90px;"> FAKE CALL </button>
+        </div>
+       </div>
+       <div class="flex justify-center mt-4">
+        <div class="w-28 h-1 bg-gray-300 rounded-full"></div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="map-modal" class="map-modal">
+   <div class="map-modal-content">
+    <div class="map-modal-header">
+     <h2 style="margin: 0; color: #dc2626; font-size: 24px; font-weight: 700;">Live Location Tracking</h2><button class="close-map-btn" onclick="closeMapModal()">Close Map</button>
+    </div>
+    <div id="live-map" style="padding-top: 80px;"></div>
+   </div>
+  </div>
+  <div id="routine-modal" class="map-modal">
+   <div class="map-modal-content">
+    <div class="map-modal-header">
+     <h2 style="margin: 0; color: #dc2626; font-size: 24px; font-weight: 700;">Daily Routine</h2><button class="close-map-btn" onclick="closeRoutineModal()">Close</button>
+    </div>
+    <div style="padding: 100px 40px 40px 40px; height: 100%; overflow-y: auto;">
+     <form id="routine-form" onsubmit="saveRoutine(event)">
+      <div style="margin-bottom: 24px;"><label for="routine-title" style="display: block; color: #be185d; font-weight: 600; margin-bottom: 8px; font-size: 14px;">Routine Title</label> <input type="text" id="routine-title" required placeholder="e.g., Morning Commute" style="width: 100%; padding: 12px 16px; border: 2px solid #fbcfe8; border-radius: 12px; font-size: 16px; outline: none; transition: all 0.3s;">
+      </div>
+      <div style="margin-bottom: 24px;">
+        <label for="routine-time-from" style="display: block; color: #be185d; font-weight: 600; margin-bottom: 8px; font-size: 14px;">From Time</label> 
+        <input type="time" id="routine-time-from" required style="width: 100%; padding: 12px 16px; border: 2px solid #fbcfe8; border-radius: 12px; font-size: 16px; outline: none; transition: all 0.3s;">
+      </div>
+      <div style="margin-bottom: 24px;">
+        <label for="routine-time-to" style="display: block; color: #be185d; font-weight: 600; margin-bottom: 8px; font-size: 14px;">To Time</label> 
+        <input type="time" id="routine-time-to" required style="width: 100%; padding: 12px 16px; border: 2px solid #fbcfe8; border-radius: 12px; font-size: 16px; outline: none; transition: all 0.3s;">
+      </div>
+      <div style="margin-bottom: 24px;"><label for="routine-location" style="display: block; color: #be185d; font-weight: 600; margin-bottom: 8px; font-size: 14px;">Location</label> <input type="text" id="routine-location" required placeholder="e.g., Walk to office" style="width: 100%; padding: 12px 16px; border: 2px solid #fbcfe8; border-radius: 12px; font-size: 16px; outline: none; transition: all 0.3s;">
+      </div>
+      <div style="margin-bottom: 24px;"><label for="routine-days" style="display: block; color: #be185d; font-weight: 600; margin-bottom: 8px; font-size: 14px;">Repeat Days</label> <select id="routine-days" multiple required style="width: 100%; padding: 12px 16px; border: 2px solid #fbcfe8; border-radius: 12px; font-size: 16px; outline: none; min-height: 120px;"> <option value="monday">Monday</option> <option value="tuesday">Tuesday</option> <option value="wednesday">Wednesday</option> <option value="thursday">Thursday</option> <option value="friday">Friday</option> <option value="saturday">Saturday</option> <option value="sunday">Sunday</option> </select>
+       <p style="font-size: 12px; color: #9ca3af; margin-top: 6px;">Hold Ctrl/Cmd to select multiple days</p>
+      </div><button type="submit" style="width: 100%; background: linear-gradient(145deg, #ef4444, #dc2626); color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">Save Routine</button>
+     </form>
+     <div id="routine-list" style="margin-top: 40px;">
+      <h3 style="color: #be185d; font-weight: 700; margin-bottom: 16px;">Saved Routines</h3>
+      <div id="routine-items"></div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="emergency-modal" class="map-modal">
+   <div class="map-modal-content">
+    <div class="map-modal-header">
+     <h2 style="margin: 0; color: #dc2626; font-size: 24px; font-weight: 700;">Emergency Contacts</h2><button class="close-map-btn" onclick="closeEmergencyModal()">Close</button>
+    </div>
+    <div style="padding: 100px 40px 40px 40px; height: 100%; overflow-y: auto;">
+     <form id="emergency-form" onsubmit="saveEmergencyContact(event)">
+      <div style="margin-bottom: 24px;"><label for="contact-name" style="display: block; color: #be185d; font-weight: 600; margin-bottom: 8px; font-size: 14px;">Contact Name</label> <input type="text" id="contact-name" required placeholder="e.g., Mom, Dad, Friend" style="width: 100%; padding: 12px 16px; border: 2px solid #fbcfe8; border-radius: 12px; font-size: 16px; outline: none;">
+      </div>
+      <div style="margin-bottom: 24px;"><label for="contact-phone" style="display: block; color: #be185d; font-weight: 600; margin-bottom: 8px; font-size: 14px;">Phone Number</label> <input type="tel" id="contact-phone" required placeholder="+1234567890" style="width: 100%; padding: 12px 16px; border: 2px solid #fbcfe8; border-radius: 12px; font-size: 16px; outline: none;">
+      </div>
+      <div style="margin-bottom: 24px;"><label for="contact-relation" style="display: block; color: #be185d; font-weight: 600; margin-bottom: 8px; font-size: 14px;">Relationship</label> <input type="text" id="contact-relation" required placeholder="e.g., Family, Friend, Colleague" style="width: 100%; padding: 12px 16px; border: 2px solid #fbcfe8; border-radius: 12px; font-size: 16px; outline: none;">
+      </div><button type="submit" style="width: 100%; background: linear-gradient(145deg, #ef4444, #dc2626); color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">Add Contact</button>
+     </form>
+     <div id="emergency-list" style="margin-top: 40px;">
+      <h3 style="color: #be185d; font-weight: 700; margin-bottom: 16px;">Emergency Contacts List</h3>
+      <div id="emergency-items"></div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="alert-modal" class="map-modal">
+   <div class="map-modal-content">
+    <div class="map-modal-header">
+     <h2 style="margin: 0; color: #dc2626; font-size: 24px; font-weight: 700;">Alert History</h2><button class="close-map-btn" onclick="closeAlertModal()">Close</button>
+    </div>
+    <div style="padding: 100px 40px 40px 40px; height: 100%; overflow-y: auto;"><button onclick="triggerNewAlert()" style="width: 100%; background: linear-gradient(145deg, #ef4444, #dc2626); color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.3s; margin-bottom: 24px;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">+ Trigger New Alert</button>
+     <div id="alert-list">
+      <h3 style="color: #be185d; font-weight: 700; margin-bottom: 16px;">Recent Alerts</h3>
+      <div id="alert-items"></div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="fakecall-modal" class="map-modal">
+   <div class="map-modal-content" style="background: linear-gradient(180deg, #1f2937 0%, #111827 100%);">
+    <div class="map-modal-header" style="background: linear-gradient(180deg, rgba(31, 41, 55, 0.98) 0%, rgba(31, 41, 55, 0.95) 100%); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+     <h2 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 700;">Incoming Call</h2><button class="close-map-btn" onclick="closeFakeCallModal()" style="background: linear-gradient(145deg, #ef4444, #dc2626);">End Call</button>
+    </div>
+    <div style="padding: 100px 40px 40px 40px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+     <div style="text-align: center;">
+      <div style="width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(145deg, #dc2626, #991b1b); margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; font-size: 48px;">
+       👤
+      </div>
+      <h3 id="caller-name" style="color: #ffffff; font-size: 28px; font-weight: 700; margin-bottom: 8px;">Sarah Thompson</h3>
+      <p style="color: #9ca3af; font-size: 16px; margin-bottom: 32px;">Mobile</p>
+      <div id="call-status" style="color: #10b981; font-size: 18px; font-weight: 600; margin-bottom: 40px;">
+       Calling...
+      </div>
+      <div style="display: flex; gap: 24px; justify-content: center; margin-top: 60px;"><button onclick="answerFakeCall()" style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(145deg, #10b981, #059669); border: none; color: white; font-size: 32px; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">📞</button> <button onclick="closeFakeCallModal()" style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(145deg, #ef4444, #dc2626); border: none; color: white; font-size: 32px; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">📵</button>
+      </div>
+     </div>
+     <div id="ai-conversation" style="display: none; width: 100%; max-width: 500px; margin-top: 40px; background: rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 20px;">
+      <div id="conversation-messages" style="color: #ffffff; font-size: 14px; line-height: 1.8;"></div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="pin-verification-modal" class="map-modal">
+   <div class="map-modal-content" style="max-width: 400px; height: auto;">
+    <div class="map-modal-header">
+     <h2 style="margin: 0; color: #dc2626; font-size: 24px; font-weight: 700;">Enter PIN to Cancel</h2><button class="close-map-btn" onclick="closePinVerificationModal()">Close</button>
+    </div>
+    <div style="padding: 100px 40px 40px 40px;">
+     <form id="pin-verification-form" onsubmit="verifyPinToCancel(event)">
+      <div style="margin-bottom: 24px;"><label for="verification-pin" style="display: block; color: #be185d; font-weight: 600; margin-bottom: 8px; font-size: 14px;">Enter 4-Digit PIN</label> <input type="password" id="verification-pin" maxlength="4" required placeholder="****" style="width: 100%; padding: 16px; border: 2px solid #fbcfe8; border-radius: 12px; font-size: 24px; text-align: center; letter-spacing: 12px; outline: none;">
+      </div>
+      <div id="pin-error" style="display: none; background: #fee2e2; color: #dc2626; padding: 12px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; text-align: center; font-weight: 600;"></div><button type="submit" style="width: 100%; background: linear-gradient(145deg, #ef4444, #dc2626); color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.3s;">Cancel Alert</button>
+     </form>
+    </div>
+   </div>
+  </div>
+  <div id="pin-settings-modal" class="map-modal">
+   <div class="map-modal-content" style="max-width: 400px; height: auto;">
+    <div class="map-modal-header">
+     <h2 style="margin: 0; color: #dc2626; font-size: 24px; font-weight: 700;">PIN Settings</h2><button class="close-map-btn" onclick="closePinSettingsModal()">Close</button>
+    </div>
+    <div style="padding: 100px 40px 40px 40px;">
+     <form id="pin-settings-form" onsubmit="updatePinSettings(event)">
+      <div style="margin-bottom: 24px;"><label for="current-pin" style="display: block; color: #be185d; font-weight: 600; margin-bottom: 8px; font-size: 14px;">Current PIN</label> <input type="password" id="current-pin" maxlength="4" required placeholder="****" style="width: 100%; padding: 16px; border: 2px solid #fbcfe8; border-radius: 12px; font-size: 24px; text-align: center; letter-spacing: 12px; outline: none;">
+      </div>
+      <div style="margin-bottom: 24px;"><label for="new-pin" style="display: block; color: #be185d; font-weight: 600; margin-bottom: 8px; font-size: 14px;">New PIN</label> <input type="password" id="new-pin" maxlength="4" required placeholder="****" style="width: 100%; padding: 16px; border: 2px solid #fbcfe8; border-radius: 12px; font-size: 24px; text-align: center; letter-spacing: 12px; outline: none;">
+      </div>
+      <div style="margin-bottom: 24px;"><label for="confirm-pin" style="display: block; color: #be185d; font-weight: 600; margin-bottom: 8px; font-size: 14px;">Confirm New PIN</label> <input type="password" id="confirm-pin" maxlength="4" required placeholder="****" style="width: 100%; padding: 16px; border: 2px solid #fbcfe8; border-radius: 12px; font-size: 24px; text-align: center; letter-spacing: 12px; outline: none;">
+      </div>
+      <div id="pin-settings-error" style="display: none; background: #fee2e2; color: #dc2626; padding: 12px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; text-align: center; font-weight: 600;"></div>
+      <div id="pin-settings-success" style="display: none; background: #d1fae5; color: #065f46; padding: 12px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; text-align: center; font-weight: 600;"></div><button type="submit" style="width: 100%; background: linear-gradient(145deg, #ef4444, #dc2626); color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.3s;">Update PIN</button>
+     </form>
+     <p style="font-size: 12px; color: #9ca3af; margin-top: 16px; text-align: center;">Default PIN: 1234</p>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Storage variables for backend integration
+    let routines = [];
+    let emergencyContacts = [];
+    let alertHistory = [];
+    let userPin = '1234';
+    let sosTimer = null;
+    let sosTimeRemaining = 30;
+    let sosActive = false;
+
+    // ========================================
+    // MAP MODAL FUNCTIONALITY
+    // ========================================
+    let liveMap, marker, circle, zoomed = false;
+
+    function openMapModal() {
+      const modal = document.getElementById('map-modal');
+      modal.classList.add('active');
+      
+      if (!liveMap) {
+        setTimeout(() => {
+          liveMap = L.map('live-map').setView([51.505, -0.09], 13);
+
+          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          }).addTo(liveMap);
+
+          navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
+        }, 100);
+      } else {
+        setTimeout(() => {
+          liveMap.invalidateSize();
+        }, 100);
+      }
+    }
+
+    function closeMapModal() {
+      const modal = document.getElementById('map-modal');
+      modal.classList.remove('active');
+    }
+
+    function success(pos) {
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      const accuracy = pos.coords.accuracy;
+
+      if (marker) {
+        liveMap.removeLayer(marker);
+        liveMap.removeLayer(circle);
+      }
+
+      marker = L.marker([lat, lng]).addTo(liveMap);
+      circle = L.circle([lat, lng], { radius: accuracy }).addTo(liveMap);
+
+      if (!zoomed) {
+        zoomed = liveMap.fitBounds(circle.getBounds());
+      }
+
+      liveMap.setView([lat, lng]);
+    }
+
+    function error(err) {
+      const mapContainer = document.getElementById('live-map');
+      
+      if (err.code === 1) {
+        mapContainer.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; padding: 40px; text-align: center;"><div style="background: #fee2e2; color: #dc2626; padding: 20px 30px; border-radius: 16px; font-size: 16px; font-weight: 600;">📍 Please allow location access to use this feature</div></div>';
+      } else {
+        mapContainer.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; padding: 40px; text-align: center;"><div style="background: #fee2e2; color: #dc2626; padding: 20px 30px; border-radius: 16px; font-size: 16px; font-weight: 600;">⚠️ Cannot get your location</div></div>';
+      }
+    }
+
+    document.getElementById('map-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeMapModal();
+      }
+    });
+
+    // ========================================
+    // ROUTINE MODAL FUNCTIONALITY
+    // ========================================
+    function openRoutineModal() {
+      document.getElementById('routine-modal').classList.add('active');
+      displayRoutines();
+    }
+
+    function closeRoutineModal() {
+      document.getElementById('routine-modal').classList.remove('active');
+    }
+
+    function saveRoutine(event) {
+      event.preventDefault();
+      
+      const title = document.getElementById('routine-title').value;
+      const timeFrom = document.getElementById('routine-time-from').value;
+      const timeTo = document.getElementById('routine-time-to').value;
+      const location = document.getElementById('routine-location').value;
+      const daysSelect = document.getElementById('routine-days');
+      const selectedDays = Array.from(daysSelect.selectedOptions).map(option => option.value);
+      
+      const routine = {
+        id: Date.now(),
+        title,
+        timeFrom,
+        timeTo,
+        location,
+        days: selectedDays
+      };
+      
+      routines.push(routine);
+      
+      document.getElementById('routine-form').reset();
+      displayRoutines();
+    }
+
+    function displayRoutines() {
+      const container = document.getElementById('routine-items');
+      
+      if (routines.length === 0) {
+        container.innerHTML = '<p style="color: #9ca3af; font-size: 14px;">No routines saved yet</p>';
+        return;
+      }
+      
+      container.innerHTML = routines.map(routine => `
+        <div class="routine-item">
+          <div style="display: flex; justify-content: space-between; align-items: start;">
+            <div>
+              <h4 style="color: #be185d; font-weight: 700; margin-bottom: 6px;">${routine.title}</h4>
+              <p style="font-size: 14px; color: #9ca3af; margin-bottom: 4px;">🕐 ${routine.timeFrom} - ${routine.timeTo}</p>
+              <p style="font-size: 14px; color: #9ca3af; margin-bottom: 4px;">📍 ${routine.location}</p>
+              <p style="font-size: 12px; color: #9ca3af;">📅 ${routine.days.join(', ')}</p>
+            </div>
+            <button class="delete-btn" onclick="deleteRoutine(${routine.id})">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function deleteRoutine(id) {
+      routines = routines.filter(r => r.id !== id);
+      displayRoutines();
+    }
+
+    document.getElementById('routine-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeRoutineModal();
+      }
+    });
+
+    // ========================================
+    // EMERGENCY CONTACTS MODAL FUNCTIONALITY
+    // ========================================
+    function openEmergencyModal() {
+      document.getElementById('emergency-modal').classList.add('active');
+      displayEmergencyContacts();
+    }
+
+    function closeEmergencyModal() {
+      document.getElementById('emergency-modal').classList.remove('active');
+    }
+
+    function saveEmergencyContact(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('contact-name').value;
+      const phone = document.getElementById('contact-phone').value;
+      const relation = document.getElementById('contact-relation').value;
+      
+      const contact = {
+        id: Date.now(),
+        name,
+        phone,
+        relation,
+        fcmToken: null
+      };
+      
+      emergencyContacts.push(contact);
+      
+      document.getElementById('emergency-form').reset();
+      displayEmergencyContacts();
+    }
+
+    function displayEmergencyContacts() {
+      const container = document.getElementById('emergency-items');
+      
+      if (emergencyContacts.length === 0) {
+        container.innerHTML = '<p style="color: #9ca3af; font-size: 14px;">No emergency contacts added yet</p>';
+        return;
+      }
+      
+      container.innerHTML = emergencyContacts.map(contact => `
+        <div class="emergency-item">
+          <div style="display: flex; justify-content: space-between; align-items: start;">
+            <div style="flex: 1;">
+              <h4 style="color: #be185d; font-weight: 700; margin-bottom: 6px;">${contact.name}</h4>
+              <p style="font-size: 14px; color: #9ca3af; margin-bottom: 4px;">📞 ${contact.phone}</p>
+              <p style="font-size: 12px; color: #9ca3af; margin-bottom: 4px;">👤 ${contact.relation}</p>
+            </div>
+            <button class="delete-btn" onclick="deleteEmergencyContact(${contact.id})">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function deleteEmergencyContact(id) {
+      emergencyContacts = emergencyContacts.filter(c => c.id !== id);
+      displayEmergencyContacts();
+    }
+
+    document.getElementById('emergency-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeEmergencyModal();
+      }
+    });
+
+    // ========================================
+    // ALERT HISTORY MODAL FUNCTIONALITY
+    // ========================================
+    function openAlertModal() {
+      document.getElementById('alert-modal').classList.add('active');
+      displayAlerts();
+    }
+
+    function closeAlertModal() {
+      document.getElementById('alert-modal').classList.remove('active');
+    }
+
+    function triggerNewAlert() {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const alert = {
+            id: Date.now(),
+            timestamp: new Date().toISOString(),
+            location: `${position.coords.latitude.toFixed(4)}, ${position.coords.longitude.toFixed(4)}`,
+            status: 'Active'
+          };
+          
+          alertHistory.unshift(alert);
+          displayAlerts();
+        },
+        () => {
+          const alert = {
+            id: Date.now(),
+            timestamp: new Date().toISOString(),
+            location: 'Location unavailable',
+            status: 'Active'
+          };
+          
+          alertHistory.unshift(alert);
+          displayAlerts();
+        }
+      );
+    }
+
+    function displayAlerts() {
+      const container = document.getElementById('alert-items');
+      
+      if (alertHistory.length === 0) {
+        container.innerHTML = '<p style="color: #9ca3af; font-size: 14px;">No alerts triggered yet</p>';
+        return;
+      }
+      
+      container.innerHTML = alertHistory.map(alert => `
+        <div class="alert-item">
+          <div style="display: flex; justify-content: space-between; align-items: start;">
+            <div>
+              <h4 style="color: #be185d; font-weight: 700; margin-bottom: 6px;">Alert #${alert.id}</h4>
+              <p style="font-size: 14px; color: #9ca3af; margin-bottom: 4px;">🕐 ${new Date(alert.timestamp).toLocaleString()}</p>
+              <p style="font-size: 14px; color: #9ca3af; margin-bottom: 4px;">📍 ${alert.location}</p>
+              <p style="font-size: 12px; color: ${alert.status === 'Active' ? '#10b981' : alert.status === 'Emergency Sent' ? '#dc2626' : '#9ca3af'};">Status: ${alert.status}</p>
+            </div>
+            <button class="delete-btn" onclick="deleteAlert(${alert.id})">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function deleteAlert(id) {
+      alertHistory = alertHistory.filter(a => a.id !== id);
+      displayAlerts();
+    }
+
+    document.getElementById('alert-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeAlertModal();
+      }
+    });
+
+    // ========================================
+    // FAKE CALL MODAL FUNCTIONALITY
+    // ========================================
+    let ringingAudio = null;
+
+    function openFakeCallModal() {
+      document.getElementById('fakecall-modal').classList.add('active');
+      document.getElementById('call-status').textContent = 'Calling...';
+      document.getElementById('ai-conversation').style.display = 'none';
+      document.getElementById('conversation-messages').innerHTML = '';
+      
+      playRingingTone();
+    }
+
+    function closeFakeCallModal() {
+      document.getElementById('fakecall-modal').classList.remove('active');
+      
+      stopRingingTone();
+    }
+
+    function answerFakeCall() {
+      document.getElementById('call-status').textContent = 'Connected';
+      document.getElementById('call-status').style.color = '#10b981';
+      
+      stopRingingTone();
+      
+      const conversationDiv = document.getElementById('ai-conversation');
+      conversationDiv.style.display = 'block';
+      
+      const aiResponses = [
+        { delay: 1000, text: '👤 AI: Hey! How are you doing?' },
+        { delay: 3000, text: '👤 AI: I was just thinking about our plans for this weekend.' },
+        { delay: 5500, text: '👤 AI: Are you still free on Saturday? We could grab lunch together.' },
+        { delay: 8000, text: '👤 AI: Let me know what works best for you!' },
+        { delay: 10000, text: '👤 AI: Anyway, I\'ll let you go. Talk soon!' }
+      ];
+      
+      aiResponses.forEach(response => {
+        setTimeout(() => {
+          const messagesDiv = document.getElementById('conversation-messages');
+          messagesDiv.innerHTML += `<p style="margin-bottom: 12px; padding: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 8px;">${response.text}</p>`;
+          messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }, response.delay);
+      });
+    }
+
+    function playRingingTone() {
+      try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let isPlaying = true;
+        
+        function playRingCycle() {
+          if (!isPlaying) return;
+          
+          const tone1Freq = 440;
+          const tone2Freq = 480;
+          
+          const oscillator1 = audioContext.createOscillator();
+          const gainNode1 = audioContext.createGain();
+          
+          oscillator1.connect(gainNode1);
+          gainNode1.connect(audioContext.destination);
+          
+          oscillator1.frequency.value = tone1Freq;
+          oscillator1.type = 'sine';
+          
+          gainNode1.gain.setValueAtTime(0, audioContext.currentTime);
+          gainNode1.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.05);
+          gainNode1.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.4);
+          
+          oscillator1.start(audioContext.currentTime);
+          oscillator1.stop(audioContext.currentTime + 0.4);
+          
+          const oscillator2 = audioContext.createOscillator();
+          const gainNode2 = audioContext.createGain();
+          
+          oscillator2.connect(gainNode2);
+          gainNode2.connect(audioContext.destination);
+          
+          oscillator2.frequency.value = tone2Freq;
+          oscillator2.type = 'sine';
+          
+          gainNode2.gain.setValueAtTime(0, audioContext.currentTime + 0.4);
+          gainNode2.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.45);
+          gainNode2.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.8);
+          
+          oscillator2.start(audioContext.currentTime + 0.4);
+          oscillator2.stop(audioContext.currentTime + 0.8);
+          
+          ringingAudio = setTimeout(() => {
+            if (isPlaying) playRingCycle();
+          }, 2000);
+        }
+        
+        playRingCycle();
+        
+        ringingAudio = {
+          stop: () => {
+            isPlaying = false;
+          },
+          context: audioContext
+        };
+        
+      } catch (error) {
+        console.log('Audio not supported');
+      }
+    }
+
+    function stopRingingTone() {
+      if (ringingAudio) {
+        if (typeof ringingAudio === 'number') {
+          clearTimeout(ringingAudio);
+        } else if (ringingAudio.stop) {
+          ringingAudio.stop();
+        }
+        ringingAudio = null;
+      }
+    }
+
+    document.getElementById('fakecall-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeFakeCallModal();
+      }
+    });
+
+    // ========================================
+    // SOS EMERGENCY ALERT SYSTEM
+    // ========================================
+    function startSOSAlert() {
+      if (sosActive) return;
+      
+      sosActive = true;
+      sosTimeRemaining = 30;
+      
+      const timerDiv = document.getElementById('sos-timer');
+      const timerSeconds = document.getElementById('timer-seconds');
+      const timerCircle = document.getElementById('timer-circle');
+      
+      timerDiv.style.display = 'block';
+      
+      const circumference = 2 * Math.PI * 35;
+      
+      sosTimer = setInterval(() => {
+        sosTimeRemaining--;
+        timerSeconds.textContent = sosTimeRemaining;
+        
+        const offset = circumference - (sosTimeRemaining / 30) * circumference;
+        timerCircle.style.strokeDashoffset = offset;
+        
+        if (sosTimeRemaining <= 0) {
+          clearInterval(sosTimer);
+          triggerEmergency();
+        }
+      }, 1000);
+    }
+
+    async function triggerEmergency() {
+      sosActive = false;
+      document.getElementById('sos-timer').style.display = 'none';
+      
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const location = `${position.coords.latitude.toFixed(6)}, ${position.coords.longitude.toFixed(6)}`;
+          
+          const alert = {
+            id: Date.now(),
+            timestamp: new Date().toISOString(),
+            location: location,
+            status: 'Emergency Sent'
+          };
+          
+          alertHistory.unshift(alert);
+          showEmergencyConfirmation(location, { successCount: emergencyContacts.length, failCount: 0 });
+        },
+        async () => {
+          const alert = {
+            id: Date.now(),
+            timestamp: new Date().toISOString(),
+            location: 'Location unavailable',
+            status: 'Emergency Sent'
+          };
+          
+          alertHistory.unshift(alert);
+          showEmergencyConfirmation('Location unavailable', { successCount: emergencyContacts.length, failCount: 0 });
+        }
+      );
+    }
+
+    function showEmergencyConfirmation(location, fcmResults = { successCount: 0, failCount: 0 }) {
+      const phoneScreen = document.getElementById('phone-screen');
+      const overlay = document.createElement('div');
+      overlay.style.cssText = 'position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(220, 38, 38, 0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; z-index: 100; border-radius: 2rem;';
+      overlay.innerHTML = `
+        <div style="text-align: center; color: white;">
+          <div style="font-size: 64px; margin-bottom: 20px;">🚨</div>
+          <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">EMERGENCY ALERT SENT!</h2>
+          <p style="font-size: 14px; margin-bottom: 8px;">Location: ${location}</p>
+          <p style="font-size: 14px; margin-bottom: 8px;">Total contacts: ${emergencyContacts.length}</p>
+          <button onclick="this.parentElement.parentElement.remove()" style="background: white; color: #dc2626; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 700; font-size: 14px; cursor: pointer; margin-top: 20px;">Close</button>
+        </div>
+      `;
+      phoneScreen.appendChild(overlay);
+    }
+
+    // ========================================
+    // PIN VERIFICATION MODAL
+    // ========================================
+    function openPinVerificationModal() {
+      document.getElementById('pin-verification-modal').classList.add('active');
+      document.getElementById('verification-pin').value = '';
+      document.getElementById('pin-error').style.display = 'none';
+    }
+
+    function closePinVerificationModal() {
+      document.getElementById('pin-verification-modal').classList.remove('active');
+    }
+
+    function verifyPinToCancel(event) {
+      event.preventDefault();
+      
+      const enteredPin = document.getElementById('verification-pin').value;
+      const errorDiv = document.getElementById('pin-error');
+      
+      if (enteredPin === userPin) {
+        clearInterval(sosTimer);
+        sosActive = false;
+        sosTimeRemaining = 30;
+        document.getElementById('sos-timer').style.display = 'none';
+        
+        const alert = {
+          id: Date.now(),
+          timestamp: new Date().toISOString(),
+          location: 'Alert cancelled by user',
+          status: 'Cancelled'
+        };
+        alertHistory.unshift(alert);
+        
+        closePinVerificationModal();
+        
+        const phoneScreen = document.getElementById('phone-screen');
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(16, 185, 129, 0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; z-index: 100; border-radius: 2rem;';
+        overlay.innerHTML = `
+          <div style="text-align: center; color: white;">
+            <div style="font-size: 64px; margin-bottom: 20px;">✅</div>
+            <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">Alert Cancelled</h2>
+            <p style="font-size: 14px; margin-bottom: 20px;">Emergency alert has been cancelled successfully</p>
+            <button onclick="this.parentElement.parentElement.remove()" style="background: white; color: #10b981; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 700; font-size: 14px; cursor: pointer;">Close</button>
+          </div>
+        `;
+        phoneScreen.appendChild(overlay);
+        setTimeout(() => overlay.remove(), 3000);
+      } else {
+        errorDiv.textContent = 'Incorrect PIN. Please try again.';
+        errorDiv.style.display = 'block';
+        document.getElementById('verification-pin').value = '';
+      }
+    }
+
+    document.getElementById('pin-verification-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closePinVerificationModal();
+      }
+    });
+
+    // ========================================
+    // PIN SETTINGS MODAL
+    // ========================================
+    function openPinSettingsModal() {
+      document.getElementById('pin-settings-modal').classList.add('active');
+      document.getElementById('current-pin').value = '';
+      document.getElementById('new-pin').value = '';
+      document.getElementById('confirm-pin').value = '';
+      document.getElementById('pin-settings-error').style.display = 'none';
+      document.getElementById('pin-settings-success').style.display = 'none';
+    }
+
+    function closePinSettingsModal() {
+      document.getElementById('pin-settings-modal').classList.remove('active');
+    }
+
+    function updatePinSettings(event) {
+      event.preventDefault();
+      
+      const currentPin = document.getElementById('current-pin').value;
+      const newPin = document.getElementById('new-pin').value;
+      const confirmPin = document.getElementById('confirm-pin').value;
+      const errorDiv = document.getElementById('pin-settings-error');
+      const successDiv = document.getElementById('pin-settings-success');
+      
+      errorDiv.style.display = 'none';
+      successDiv.style.display = 'none';
+      
+      if (currentPin !== userPin) {
+        errorDiv.textContent = 'Current PIN is incorrect';
+        errorDiv.style.display = 'block';
+        return;
+      }
+      
+      if (newPin.length !== 4 || !/^\d+$/.test(newPin)) {
+        errorDiv.textContent = 'New PIN must be 4 digits';
+        errorDiv.style.display = 'block';
+        return;
+      }
+      
+      if (newPin !== confirmPin) {
+        errorDiv.textContent = 'New PIN and confirmation do not match';
+        errorDiv.style.display = 'block';
+        return;
+      }
+      
+      userPin = newPin;
+      successDiv.textContent = 'PIN updated successfully!';
+      successDiv.style.display = 'block';
+      
+      document.getElementById('pin-settings-form').reset();
+      
+      setTimeout(() => {
+        closePinSettingsModal();
+      }, 2000);
+    }
+
+    document.getElementById('pin-settings-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closePinSettingsModal();
+      }
+    });
+  </script>
+ </body>
+</html>
