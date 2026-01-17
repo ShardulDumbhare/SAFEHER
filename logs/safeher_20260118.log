@@ -88,3 +88,228 @@
 2026-01-18 03:25:12 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
 2026-01-18 03:25:12 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
 2026-01-18 03:25:12 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:05:11 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:05:11 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:05:11 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:05:11 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:05:11 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:05:11 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:05:12 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:05:12 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:05:12 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'sos_logs_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:05:12 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:05:12 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:05:12 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:21:49 - SAFEHER - DEBUG - [logger.py:59] - Fetching contacts for demo_user
+2026-01-18 04:21:49 - SAFEHER - ERROR - [logger.py:65] - Error getting contacts: 1146 (42S02): Table 'zoha.contact_details' doesn't exist
+2026-01-18 04:21:49 - SAFEHER - ERROR - [logger.py:65] - Error fetching contacts for demo_user: 1146 (42S02): Table 'zoha.contact_details' doesn't exist
+2026-01-18 04:22:09 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:22:09 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1146 (42S02): Table 'zoha.contact_details' doesn't exist
+2026-01-18 04:22:09 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1146 (42S02): Table 'zoha.contact_details' doesn't exist
+2026-01-18 04:22:13 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:22:13 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1146 (42S02): Table 'zoha.contact_details' doesn't exist
+2026-01-18 04:22:13 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1146 (42S02): Table 'zoha.contact_details' doesn't exist
+2026-01-18 04:22:25 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:22:25 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1146 (42S02): Table 'zoha.contact_details' doesn't exist
+2026-01-18 04:22:25 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1146 (42S02): Table 'zoha.contact_details' doesn't exist
+2026-01-18 04:24:18 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:24:18 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:24:18 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:24:18 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:24:18 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:24:18 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:24:35 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:24:35 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:24:35 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:04 - SAFEHER - DEBUG - [logger.py:59] - Fetching contacts for demo_user
+2026-01-18 04:25:04 - SAFEHER - ERROR - [logger.py:65] - Error getting contacts: 1054 (42S22): Unknown column 'username' in 'where clause'
+2026-01-18 04:25:04 - SAFEHER - ERROR - [logger.py:65] - Error fetching contacts for demo_user: 1054 (42S22): Unknown column 'username' in 'where clause'
+2026-01-18 04:25:09 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:25:09 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:09 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:11 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:25:11 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:11 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:11 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:25:11 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:11 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:11 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:25:11 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:11 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:11 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:25:11 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:11 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:12 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:25:12 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:12 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:12 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:25:12 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:12 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:25:24 - SAFEHER - DEBUG - [logger.py:59] - Fetching contacts for demo_user
+2026-01-18 04:25:24 - SAFEHER - ERROR - [logger.py:65] - Error getting contacts: 1054 (42S22): Unknown column 'username' in 'where clause'
+2026-01-18 04:25:24 - SAFEHER - ERROR - [logger.py:65] - Error fetching contacts for demo_user: 1054 (42S22): Unknown column 'username' in 'where clause'
+2026-01-18 04:28:08 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:28:08 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:28:08 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:28:08 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:28:08 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:28:08 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:30:00 - SAFEHER - DEBUG - [logger.py:59] - Fetching contacts for demo_user
+2026-01-18 04:30:00 - SAFEHER - ERROR - [logger.py:65] - Error getting contacts: 1054 (42S22): Unknown column 'name' in 'field list'
+2026-01-18 04:30:00 - SAFEHER - ERROR - [logger.py:65] - Error fetching contacts for demo_user: 1054 (42S22): Unknown column 'name' in 'field list'
+2026-01-18 04:30:12 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:30:12 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:12 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:13 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:30:13 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:13 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:13 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:30:13 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:13 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:13 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:30:13 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:13 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:13 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:30:13 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:13 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:14 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:30:14 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:14 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:14 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:30:14 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:14 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:15 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:30:15 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:15 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:17 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:30:17 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:30:17 - SAFEHER - WARNING - [logger.py:62] - Contact addition failed for demo_user: Database error: 1054 (42S22): Unknown column 'username' in 'field list'
+2026-01-18 04:32:43 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:32:43 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:32:43 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:32:43 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:32:43 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:32:43 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:32:45 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:32:45 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:32:45 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:32:45 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:32:46 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:32:46 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:32:49 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:32:49 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:32:49 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:32:49 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:32:49 - SAFEHER - ERROR - [logger.py:65] - Error inserting contact: 1264 (22003): Out of range value for column 'contact-phone' at row 1
+2026-01-18 04:33:06 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:33:06 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:33:06 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:33:06 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:33:07 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:33:07 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:33:24 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:33:24 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:33:24 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:33:24 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:33:37 - SAFEHER - ERROR - [logger.py:65] - Health check failed: Unread result found
+2026-01-18 04:34:00 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:34:00 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:34:00 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:34:00 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:34:00 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:34:00 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:34:01 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:34:01 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:34:01 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:34:01 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:34:01 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:34:01 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:34:52 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:34:52 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:34:52 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:34:52 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:34:53 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:34:53 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:34:53 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:34:53 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:34:53 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:34:53 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:34:53 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:34:53 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:35:00 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:35:00 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:35:00 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:35:00 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:35:00 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:35:00 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:35:51 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:35:51 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:35:51 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:35:51 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:35:51 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:35:51 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:36:13 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:36:13 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:36:13 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:36:13 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:36:13 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:36:13 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:38:24 - SAFEHER - DEBUG - [logger.py:59] - Fetching contacts for demo_user
+2026-01-18 04:38:24 - SAFEHER - INFO - [logger.py:56] - Retrieved 1 contacts for demo_user
+2026-01-18 04:38:38 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: zoha
+2026-01-18 04:38:38 - SAFEHER - INFO - [logger.py:56] - Contact added for demo_user: zoha
+2026-01-18 04:39:27 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: mom
+2026-01-18 04:39:27 - SAFEHER - INFO - [logger.py:56] - Contact added for demo_user: mom
+2026-01-18 04:55:25 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:55:25 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:55:25 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:55:25 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:55:26 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:55:26 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:56:06 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:56:06 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:56:06 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:56:06 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:56:06 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:56:23 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:56:23 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:56:23 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:56:23 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:56:23 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 04:56:23 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 04:59:44 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 04:59:44 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:59:44 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 04:59:44 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 04:59:44 - SAFEHER - ERROR - [logger.py:65] - Error inserting routine: 1364 (HY000): Field 'created_at' doesn't have a default value
+2026-01-18 05:00:00 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 05:00:00 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:00:00 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:00:00 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 05:00:34 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 05:00:34 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:00:34 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:00:34 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 05:00:34 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 05:00:34 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 05:01:17 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 05:01:17 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:01:17 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:01:17 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 05:01:18 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 05:01:41 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 05:01:41 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:01:41 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:01:41 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 05:01:42 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 05:01:42 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 05:02:30 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 05:02:30 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:02:30 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:02:30 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 05:02:30 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 05:02:30 - SAFEHER - ERROR - [logger.py:65] - Health check failed: Unread result found
+2026-01-18 05:02:30 - SAFEHER - DEBUG - [logger.py:59] - Adding routine for test_user: Test Routine
+2026-01-18 05:02:30 - SAFEHER - INFO - [logger.py:56] - Routine added for test_user: Test Routine
+2026-01-18 05:02:30 - SAFEHER - DEBUG - [logger.py:59] - Fetching routines for test_user
+2026-01-18 05:02:30 - SAFEHER - INFO - [logger.py:56] - Routines retrieved for test_user

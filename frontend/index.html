@@ -355,6 +355,10 @@
    </div>
   </div>
   <script>
+    // API Configuration
+    const API_URL = 'http://localhost:5000';
+    let currentUsername = localStorage.getItem('username') || 'demo_user';
+    
     // Storage variables for backend integration
     let routines = [];
     let emergencyContacts = [];
@@ -363,6 +367,36 @@
     let sosTimer = null;
     let sosTimeRemaining = 30;
     let sosActive = false;
+
+    // ========================================
+    // API HELPER FUNCTIONS
+    // ========================================
+    async function apiCall(endpoint, method = 'GET', data = null) {
+      try {
+        const options = {
+          method: method,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+        
+        if (data) {
+          options.body = JSON.stringify(data);
+        }
+        
+        const response = await fetch(`${API_URL}${endpoint}`, options);
+        const result = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(result.error || 'API Error');
+        }
+        
+        return result;
+      } catch (error) {
+        console.error('API Error:', error);
+        return null;
+      }
+    }
 
     // ========================================
     // MAP MODAL FUNCTIONALITY
@@ -437,7 +471,7 @@
     // ========================================
     function openRoutineModal() {
       document.getElementById('routine-modal').classList.add('active');
-      displayRoutines();
+      loadRoutines();
     }
 
     function closeRoutineModal() {
@@ -454,19 +488,31 @@
       const daysSelect = document.getElementById('routine-days');
       const selectedDays = Array.from(daysSelect.selectedOptions).map(option => option.value);
       
-      const routine = {
-        id: Date.now(),
-        title,
-        timeFrom,
-        timeTo,
-        location,
-        days: selectedDays
-      };
-      
-      routines.push(routine);
-      
-      document.getElementById('routine-form').reset();
-      displayRoutines();
+      // Save to database via API
+      apiCall('/routine', 'POST', {
+        username: currentUsername,
+        title: title,
+        timeFrom: timeFrom,
+        timeTo: timeTo,
+        location: location,
+        days: selectedDays.join(',')
+      }).then(response => {
+        if (response) {
+          const routine = {
+            id: Date.now(),
+            title,
+            timeFrom,
+            timeTo,
+            location,
+            days: selectedDays
+          };
+          
+          routines.push(routine);
+          document.getElementById('routine-form').reset();
+          displayRoutines();
+          console.log('Routine saved to database');
+        }
+      });
     }
 
     function displayRoutines() {
@@ -492,9 +538,32 @@
       `).join('');
     }
 
-    function deleteRoutine(id) {
-      routines = routines.filter(r => r.id !== id);
+    function deleteRoutine(routineId) {
+      routines = routines.filter(r => r.id !== routineId);
+      
+      // Delete from database
+      apiCall(`/routine/${routineId}`, 'DELETE', null).then(response => {
+        console.log('Routine deleted from database');
+      });
+      
       displayRoutines();
+    }
+
+    function loadRoutines() {
+      apiCall(`/routines/${currentUsername}`, 'GET', null).then(response => {
+        if (response && response.routines) {
+          routines = response.routines.map(r => ({
+            id: r.id,
+            title: r.title,
+            timeFrom: r.timeFrom,
+            timeTo: r.timeTo,
+            location: r.location,
+            days: r.days ? r.days.split(',') : []
+          }));
+          displayRoutines();
+          console.log('Routines loaded from database');
+        }
+      });
     }
 
     document.getElementById('routine-modal').addEventListener('click', function(e) {
@@ -508,7 +577,7 @@
     // ========================================
     function openEmergencyModal() {
       document.getElementById('emergency-modal').classList.add('active');
-      displayEmergencyContacts();
+      loadEmergencyContacts();
     }
 
     function closeEmergencyModal() {
@@ -522,18 +591,43 @@
       const phone = document.getElementById('contact-phone').value;
       const relation = document.getElementById('contact-relation').value;
       
-      const contact = {
-        id: Date.now(),
-        name,
-        phone,
-        relation,
-        fcmToken: null
-      };
-      
-      emergencyContacts.push(contact);
-      
-      document.getElementById('emergency-form').reset();
-      displayEmergencyContacts();
+      // Save to database via API
+      apiCall('/contact', 'POST', {
+        username: currentUsername,
+        name: name,
+        relation: relation,
+        contact: phone
+      }).then(response => {
+        if (response) {
+          // Add to local array
+          const contact = {
+            id: Date.now(),
+            name,
+            phone,
+            relation,
+            fcmToken: null
+          };
+          emergencyContacts.push(contact);
+          
+          document.getElementById('emergency-form').reset();
+          displayEmergencyContacts();
+          console.log('Contact saved to database');
+        }
+      });
+    }
+
+    async function loadEmergencyContacts() {
+      const contacts = await apiCall(`/contacts/${currentUsername}`, 'GET');
+      if (contacts && Array.isArray(contacts)) {
+        emergencyContacts = contacts.map(c => ({
+          id: c.id || Date.now(),
+          name: c.name,
+          phone: c.contact,
+          relation: c.relation,
+          fcmToken: null
+        }));
+        displayEmergencyContacts();
+      }
     }
 
     function displayEmergencyContacts() {
@@ -804,7 +898,18 @@
       
       navigator.geolocation.getCurrentPosition(
         async (position) => {
-          const location = `${position.coords.latitude.toFixed(6)}, ${position.coords.longitude.toFixed(6)}`;
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          const accuracy = position.coords.accuracy;
+          const location = `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+          
+          // Save SOS to database
+          await apiCall('/sos', 'POST', {
+            username: currentUsername,
+            latitude: latitude,
+            longitude: longitude,
+            accuracy: accuracy
+          });
           
           const alert = {
             id: Date.now(),

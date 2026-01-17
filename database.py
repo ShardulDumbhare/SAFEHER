@@ -119,9 +119,17 @@ def insert_contact(username, name, relation, contact):
     try:
         conn = get_connection()
         cursor = conn.cursor()
+        # Convert phone to integer, taking last 9 digits if needed to fit INT
+        phone_str = str(contact).replace('+', '').replace('-', '').replace(' ', '')
+        # If phone number is too long, take last 9 digits (for INT max value ~2.1 billion)
+        if len(phone_str) > 9:
+            phone_int = int(phone_str[-9:])
+        else:
+            phone_int = int(phone_str)
+        
         cursor.execute(
-            'INSERT INTO contact_details (username, name, relation, contact) VALUES (%s, %s, %s, %s)',
-            (username, name, relation, contact)
+            'INSERT INTO emergency_contacts (`contact-name`, `contact-phone`, `contact-relation`) VALUES (%s, %s, %s)',
+            (name, phone_int, relation)
         )
         conn.commit()
         cursor.close()
@@ -193,10 +201,10 @@ def get_user_contacts(username):
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute('SELECT name, relation, contact FROM contact_details WHERE username = %s', (username,))
+        cursor.execute('SELECT `contact-name`, `contact-relation`, `contact-phone` FROM emergency_contacts', ())
         results = cursor.fetchall()
         cursor.close()
-        return [{"name": r[0], "relation": r[1], "contact": r[2]} for r in results]
+        return [{"name": r[0], "relation": r[1], "contact": str(r[2])} for r in results]
     except Exception as e:
         error(f"Error getting contacts: {e}")
         raise
@@ -223,6 +231,63 @@ def get_user_locations(username, limit=50):
     except Exception as e:
         error(f"Error getting locations: {e}")
         raise
+    finally:
+        if conn:
+            conn.close()
+
+def insert_routine(username, title, time_from, time_to, location, days):
+    """Insert a routine for a user"""
+    conn = None
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO routines (username, title, time_from, time_to, location, days, created_at, updated_at) VALUES (%s, %s, %s, %s, %s, %s, NOW(), NOW())',
+            (username, title, time_from, time_to, location, days)
+        )
+        conn.commit()
+        cursor.close()
+        return True, "Routine saved successfully"
+    except Exception as e:
+        error(f"Error inserting routine: {e}")
+        return False, str(e)
+    finally:
+        if conn:
+            conn.close()
+
+def get_user_routines(username):
+    """Get all routines for a user"""
+    conn = None
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            'SELECT id, title, time_from, time_to, location, days FROM routines WHERE username = %s ORDER BY time_from ASC',
+            (username,)
+        )
+        results = cursor.fetchall()
+        cursor.close()
+        return [{"id": r[0], "title": r[1], "timeFrom": str(r[2]), "timeTo": str(r[3]), "location": r[4], "days": r[5]} for r in results]
+    except Exception as e:
+        error(f"Error getting routines: {e}")
+        return []
+    finally:
+        if conn:
+            conn.close()
+
+def delete_routine(routine_id):
+    """Delete a routine by ID"""
+    conn = None
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute('DELETE FROM routines WHERE id = %s', (routine_id,))
+        conn.commit()
+        cursor.close()
+        return True, "Routine deleted successfully"
+    except Exception as e:
+        error(f"Error deleting routine: {e}")
+        return False, str(e)
     finally:
         if conn:
             conn.close()

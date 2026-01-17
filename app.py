@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 from ai_engine import run_ai_risk_check
 from db_adapter import log_location, log_sos, log_user, log_contact, user_exists
-from database import get_user, get_user_contacts, get_user_locations, get_connection
+from database import get_user, get_user_contacts, get_user_locations, get_connection, insert_routine, get_user_routines, delete_routine
 from logger import info, error, warning, debug
 import firebase_admin
 from firebase_admin import credentials, messaging
@@ -269,7 +269,68 @@ def get_user_info(username):
         error(f"Error fetching user {username}: {e}")
         return jsonify({"error": "Failed to fetch user", "message": str(e)}), 500
 
+@app.route('/routine', methods=['POST'])
+def add_routine():
+    """Add a daily routine"""
+    data = request.get_json() or {}
+    username = data.get('username')
+    title = data.get('title')
+    time_from = data.get('timeFrom')
+    time_to = data.get('timeTo')
+    location = data.get('location', '')
+    days = data.get('days', '')
+    
+    # Validate required fields
+    if not all([username, title, time_from, time_to]):
+        warning("Add routine request with missing fields")
+        return jsonify({"error": "Missing required fields: username, title, timeFrom, timeTo"}), 400
+    
+    debug(f"Adding routine for {username}: {title}")
+    
+    # Add routine to database
+    success, message = insert_routine(username, title, time_from, time_to, location, days)
+    
+    if success:
+        info(f"Routine added for {username}: {title}")
+        return jsonify({"status": "Success", "message": message}), 201
+    else:
+        warning(f"Routine addition failed for {username}: {message}")
+        return jsonify({"error": "Failed to add routine", "message": message}), 400
+
+@app.route('/routines/<username>', methods=['GET'])
+def get_routines(username):
+    """Get all routines for a user"""
+    if not username:
+        return jsonify({"error": "Username required"}), 400
+    
+    debug(f"Fetching routines for {username}")
+    
+    try:
+        routines = get_user_routines(username)
+        info(f"Routines retrieved for {username}")
+        return jsonify({"routines": routines}), 200
+    except Exception as e:
+        error(f"Error fetching routines for {username}: {e}")
+        return jsonify({"error": "Failed to fetch routines", "message": str(e)}), 500
+
+@app.route('/routine/<int:routine_id>', methods=['DELETE'])
+def remove_routine(routine_id):
+    """Delete a routine"""
+    debug(f"Deleting routine: {routine_id}")
+    
+    try:
+        success, message = delete_routine(routine_id)
+        if success:
+            info(f"Routine deleted: {routine_id}")
+            return jsonify({"status": "Success", "message": message}), 200
+        else:
+            warning(f"Routine deletion failed: {message}")
+            return jsonify({"error": "Failed to delete routine", "message": message}), 400
+    except Exception as e:
+        error(f"Error deleting routine {routine_id}: {e}")
+        return jsonify({"error": "Failed to delete routine", "message": str(e)}), 500
+
 # --- 5. LAUNCH ---
 if __name__ == '__main__':
     info("Starting SAFEHER Flask Application")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=5000)
