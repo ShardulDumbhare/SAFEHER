@@ -313,3 +313,17 @@
 2026-01-18 05:02:30 - SAFEHER - INFO - [logger.py:56] - Routine added for test_user: Test Routine
 2026-01-18 05:02:30 - SAFEHER - DEBUG - [logger.py:59] - Fetching routines for test_user
 2026-01-18 05:02:30 - SAFEHER - INFO - [logger.py:56] - Routines retrieved for test_user
+2026-01-18 05:03:33 - SAFEHER - INFO - [logger.py:56] - Connection pool created successfully
+2026-01-18 05:03:33 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:03:33 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:03:33 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 05:03:34 - SAFEHER - INFO - [logger.py:56] - Firebase is connected and ready!
+2026-01-18 05:03:34 - SAFEHER - INFO - [logger.py:56] - Starting SAFEHER Flask Application
+2026-01-18 05:06:42 - SAFEHER - DEBUG - [logger.py:59] - Fetching contacts for demo_user
+2026-01-18 05:06:42 - SAFEHER - INFO - [logger.py:56] - Retrieved 3 contacts for demo_user
+2026-01-18 05:06:57 - SAFEHER - DEBUG - [logger.py:59] - Adding contact for demo_user: hiul
+2026-01-18 05:06:57 - SAFEHER - INFO - [logger.py:56] - Contact added for demo_user: hiul
+2026-01-18 05:07:25 - SAFEHER - DEBUG - [logger.py:59] - Fetching routines for demo_user
+2026-01-18 05:07:25 - SAFEHER - INFO - [logger.py:56] - Routines retrieved for demo_user
+2026-01-18 05:07:49 - SAFEHER - DEBUG - [logger.py:59] - Adding routine for demo_user: gukk
+2026-01-18 05:07:49 - SAFEHER - INFO - [logger.py:56] - Routine added for demo_user: gukk

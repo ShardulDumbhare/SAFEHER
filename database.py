@@ -292,6 +292,108 @@ def delete_routine(routine_id):
         if conn:
             conn.close()
 
+def check_location_against_routine(username, current_lat, current_lon):
+    """
+    Check if user's current location matches their routine location for current time.
+    Returns: (is_at_correct_location, routine_info, distance_km)
+    """
+    conn = None
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        # Get all routines for user
+        cursor.execute(
+            'SELECT id, title, time_from, time_to, location FROM routines WHERE username = %s',
+            (username,)
+        )
+        routines = cursor.fetchall()
+        cursor.close()
+        
+        from datetime import datetime
+        current_time = datetime.now().time()
+        
+        # Check if user is currently in a scheduled routine
+        for routine in routines:
+            routine_id, title, time_from, time_to, routine_location = routine
+            
+            # Check if current time falls within routine time
+            if time_from <= current_time <= time_to:
+                # Calculate distance between current location and routine location
+                distance = calculate_distance(current_lat, current_lon, routine_location)
+                
+                # If routine has specific location and user is far (>1km), it's a mismatch
+                if routine_location and distance is not None and distance > 1.0:
+                    return False, {
+                        "routine_id": routine_id,
+                        "title": title,
+                        "location": routine_location,
+                        "time_from": str(time_from),
+                        "time_to": str(time_to)
+                    }, distance
+                elif routine_location and distance is not None:
+                    return True, {
+                        "routine_id": routine_id,
+                        "title": title,
+                        "location": routine_location,
+                        "distance_km": round(distance, 2)
+                    }, distance
+        
+        # No active routine at this time
+        return True, None, 0
+        
+    except Exception as e:
+        error(f"Error checking location against routine: {e}")
+        return None, None, None
+    finally:
+        if conn:
+            conn.close()
+
+def calculate_distance(lat1, lon1, location_name):
+    """
+    Calculate distance from coordinates to a location name.
+    For now, returns a placeholder - can integrate with geocoding API later.
+    Returns distance in kilometers.
+    """
+    try:
+        # This is a simplified version - in production, you'd use geocoding
+        # to convert location_name to coordinates, then calculate distance
+        
+        # For now, we'll just return None if location_name is not specific coordinates
+        # In future, integrate with Google Maps or similar API
+        
+        # Simple check: if location_name contains coordinates format
+        if "," in str(location_name):
+            try:
+                parts = location_name.split(",")
+                loc_lat = float(parts[0].strip())
+                loc_lon = float(parts[1].strip())
+                
+                # Haversine formula to calculate distance
+                from math import radians, sin, cos, sqrt, atan2
+                
+                R = 6371  # Earth's radius in kilometers
+                
+                lat1_rad = radians(float(lat1))
+                lon1_rad = radians(float(lon1))
+                lat2_rad = radians(loc_lat)
+                lon2_rad = radians(loc_lon)
+                
+                dlat = lat2_rad - lat1_rad
+                dlon = lon2_rad - lon1_rad
+                
+                a = sin(dlat/2)**2 + cos(lat1_rad) * cos(lat2_rad) * sin(dlon/2)**2
+                c = 2 * atan2(sqrt(a), sqrt(1-a))
+                
+                distance = R * c
+                return distance
+            except:
+                return None
+        return None
+    except Exception as e:
+        error(f"Error calculating distance: {e}")
+        return None
+
 # Initialize database on import
 try:
     init_db()

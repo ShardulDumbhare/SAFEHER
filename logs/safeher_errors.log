@@ -165,3 +165,6 @@
 2026-01-18 05:02:30 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
 2026-01-18 05:02:30 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
 2026-01-18 05:02:30 - SAFEHER - ERROR - [logger.py:65] - Health check failed: Unread result found
+2026-01-18 05:03:33 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:03:33 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
+2026-01-18 05:03:33 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
