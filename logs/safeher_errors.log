@@ -168,3 +168,18 @@
 2026-01-18 05:03:33 - SAFEHER - ERROR - [logger.py:65] - Error initializing database: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
 2026-01-18 05:03:33 - SAFEHER - ERROR - [logger.py:65] - MySQL connection warning: 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'contact_details_ibfk_1' in the referenced table 'user_details'
 2026-01-18 05:03:33 - SAFEHER - ERROR - [logger.py:65] - Make sure MySQL is running and credentials are correct in environment variables
+2026-01-18 05:48:39 - SAFEHER - ERROR - [logger.py:65] - Error logging SOS: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:48:39 - SAFEHER - ERROR - [logger.py:65] - SOS logging failed for demo_user: Database error: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:48:40 - SAFEHER - ERROR - [logger.py:65] - Error logging SOS: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:48:40 - SAFEHER - ERROR - [logger.py:65] - SOS logging failed for demo_user: Database error: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:48:41 - SAFEHER - ERROR - [logger.py:65] - ALERT: demo_user
+2026-01-18 05:48:41 - SAFEHER - ERROR - [logger.py:65] - ALERT: demo_user
+2026-01-18 05:53:31 - SAFEHER - ERROR - [logger.py:65] - Error logging SOS: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:53:31 - SAFEHER - ERROR - [logger.py:65] - SOS logging failed for demo_user: Database error: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:53:33 - SAFEHER - ERROR - [logger.py:65] - ALERT: demo_user
+2026-01-18 05:53:34 - SAFEHER - ERROR - [logger.py:65] - Error logging SOS: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:53:34 - SAFEHER - ERROR - [logger.py:65] - SOS logging failed for demo_user: Database error: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:53:34 - SAFEHER - ERROR - [logger.py:65] - ALERT: demo_user
+2026-01-18 05:56:53 - SAFEHER - ERROR - [logger.py:65] - Error logging SOS: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:56:53 - SAFEHER - ERROR - [logger.py:65] - SOS logging failed for demo_user: Database error: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:56:54 - SAFEHER - ERROR - [logger.py:65] - ALERT: demo_user

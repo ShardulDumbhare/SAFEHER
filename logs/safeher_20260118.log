@@ -327,3 +327,23 @@
 2026-01-18 05:07:25 - SAFEHER - INFO - [logger.py:56] - Routines retrieved for demo_user
 2026-01-18 05:07:49 - SAFEHER - DEBUG - [logger.py:59] - Adding routine for demo_user: gukk
 2026-01-18 05:07:49 - SAFEHER - INFO - [logger.py:56] - Routine added for demo_user: gukk
+2026-01-18 05:48:39 - SAFEHER - ERROR - [logger.py:65] - Error logging SOS: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:48:39 - SAFEHER - ERROR - [logger.py:65] - SOS logging failed for demo_user: Database error: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:48:40 - SAFEHER - ERROR - [logger.py:65] - Error logging SOS: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:48:40 - SAFEHER - ERROR - [logger.py:65] - SOS logging failed for demo_user: Database error: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:48:41 - SAFEHER - ERROR - [logger.py:65] - ALERT: demo_user
+2026-01-18 05:48:41 - SAFEHER - ERROR - [logger.py:65] - ALERT: demo_user
+2026-01-18 05:48:41 - SAFEHER - WARNING - [logger.py:62] - Firebase error: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2026-01-18 05:48:41 - SAFEHER - WARNING - [logger.py:62] - Firebase error: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2026-01-18 05:53:31 - SAFEHER - ERROR - [logger.py:65] - Error logging SOS: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:53:31 - SAFEHER - ERROR - [logger.py:65] - SOS logging failed for demo_user: Database error: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:53:33 - SAFEHER - ERROR - [logger.py:65] - ALERT: demo_user
+2026-01-18 05:53:33 - SAFEHER - WARNING - [logger.py:62] - Firebase error: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2026-01-18 05:53:34 - SAFEHER - ERROR - [logger.py:65] - Error logging SOS: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:53:34 - SAFEHER - ERROR - [logger.py:65] - SOS logging failed for demo_user: Database error: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:53:34 - SAFEHER - ERROR - [logger.py:65] - ALERT: demo_user
+2026-01-18 05:53:34 - SAFEHER - WARNING - [logger.py:62] - Firebase error: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+2026-01-18 05:56:53 - SAFEHER - ERROR - [logger.py:65] - Error logging SOS: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:56:53 - SAFEHER - ERROR - [logger.py:65] - SOS logging failed for demo_user: Database error: 1146 (42S02): Table 'zoha.sos_logs' doesn't exist
+2026-01-18 05:56:54 - SAFEHER - ERROR - [logger.py:65] - ALERT: demo_user
+2026-01-18 05:56:54 - SAFEHER - WARNING - [logger.py:62] - Firebase error: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
